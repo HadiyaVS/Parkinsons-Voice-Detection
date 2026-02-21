@@ -52,7 +52,7 @@ Project Documentation
   For Software:
 
     1.Accuracy matrix & Sample Prediction
-    [Accuracy matrix]("accuracy matrix.jpeg")
+    [Accuracy matrix]("accuracy_matrix.jpeg")
     The image shows a machine learning evaluation output with a **model accuracy of about 94.87%** and a displayed **confusion matrix**.
     The matrix indicates:
     * 5 true healthy correctly predicted
@@ -68,7 +68,7 @@ Project Documentation
     On the right, the results display **“Low Risk (Healthy)”** with a confidence score, and below it an **MFCC heatmap** visualizing the extracted voice features used for prediction.
 
     3.Model View
-    [Model View](")
+    [Model View]("model_view.jpeg")
     The image shows a dark-themed web interface for a voice-based health prediction app. It allows users to upload a WAV audio file to determine whether a person is healthy or affected by Parkinson’s.
     On the left side, there is a drag-and-drop area labeled “Drop Audio Here – or – Click to Upload,” along with **Clear** and **Submit** buttons.
     On the right side, there are output panels (labeled “output 0” and “output 1”) where the prediction results and related information would be displayed, plus a **Flag** button below.
