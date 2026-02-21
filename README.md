@@ -62,7 +62,7 @@ Project Documentation
     Below the matrix, there is a warning from scikit-learn about feature names and a final prediction stating **“High Risk of Parkinson’s Disease.”*
 
     2.Prediction Output
-    [Prediction Dutput]("")
+    [Prediction Dutput]("prediction_view.jpeg")
     The image shows a dark-themed web app titled **“Parkinson’s Voice Detection.”**
     On the left, a WAV audio file is uploaded with a visible waveform and playback controls, along with **Clear** and **Submit** buttons.
     On the right, the results display **“Low Risk (Healthy)”** with a confidence score, and below it an **MFCC heatmap** visualizing the extracted voice features used for prediction.
