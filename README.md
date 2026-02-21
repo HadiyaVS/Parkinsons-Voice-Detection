@@ -52,7 +52,7 @@ Project Documentation
   For Software:
 
     1.Accuracy matrix & Sample Prediction
-    [Accuracy matrix]("accuracy_matrix.jpeg")
+    [Accuracy matrix]("https://raw.githubusercontent.com/HadiyaVS/Parkinsons-Voice-Detection/refs/heads/main/accuracy_matrix.jpeg")
     The image shows a machine learning evaluation output with a **model accuracy of about 94.87%** and a displayed **confusion matrix**.
     The matrix indicates:
     * 5 true healthy correctly predicted
