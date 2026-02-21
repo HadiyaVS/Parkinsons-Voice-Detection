@@ -52,7 +52,7 @@ Project Documentation
   For Software:
 
     1.Accuracy matrix & Sample Prediction
-    [Accuracy matrix]("C:\Users\unnia\Downloads\WhatsApp Image 2026-02-21 at 9.50.12 AM.jpeg")
+    [Accuracy matrix]("accuracy matrix.jpeg")
     The image shows a machine learning evaluation output with a **model accuracy of about 94.87%** and a displayed **confusion matrix**.
     The matrix indicates:
     * 5 true healthy correctly predicted
@@ -62,13 +62,13 @@ Project Documentation
     Below the matrix, there is a warning from scikit-learn about feature names and a final prediction stating **“High Risk of Parkinson’s Disease.”*
 
     2.Prediction Output
-    [Prediction Dutput]("C:\Users\unnia\Downloads\WhatsApp Image 2026-02-21 at 9.49.40 AM.jpeg")
+    [Prediction Dutput]("")
     The image shows a dark-themed web app titled **“Parkinson’s Voice Detection.”**
     On the left, a WAV audio file is uploaded with a visible waveform and playback controls, along with **Clear** and **Submit** buttons.
     On the right, the results display **“Low Risk (Healthy)”** with a confidence score, and below it an **MFCC heatmap** visualizing the extracted voice features used for prediction.
 
     3.Model View
-    [Model View]("C:\Users\unnia\Downloads\WhatsApp Image 2026-02-21 at 9.49.23 AM (1).jpeg")
+    [Model View](")
     The image shows a dark-themed web interface for a voice-based health prediction app. It allows users to upload a WAV audio file to determine whether a person is healthy or affected by Parkinson’s.
     On the left side, there is a drag-and-drop area labeled “Drop Audio Here – or – Click to Upload,” along with **Clear** and **Submit** buttons.
     On the right side, there are output panels (labeled “output 0” and “output 1”) where the prediction results and related information would be displayed, plus a **Flag** button below.
@@ -150,113 +150,60 @@ This converts variable-length audio into fixed numerical input for ML.
 ---
 3.Feature Engineering Layer
   Tool Used:scikit-learn
+  Component: `StandardScaler`
+  Purpose:
+  * Normalize features (mean = 0, std = 1)
+  * Ensures consistent feature scale
+  * Prevents model bias
+    This layer ensures input data matches the scale used during model training.
 
-**Component:**
+ 4.Machine Learning Layer
+  Model Used: `RandomForestClassifier`
+  From:scikit-learn
+  Function:
+  * Receives scaled MFCC features
+  * Passes them through multiple decision trees
+  * Aggregates predictions
+  * Outputs: * Class label (0 or 1)
+             * Probability score
 
-* `StandardScaler`
-
-**Purpose:**
-
-* Normalize features (mean = 0, std = 1)
-* Ensures consistent feature scale
-* Prevents model bias
-
-This layer ensures input data matches the scale used during model training.
-
----
-
-## 4️⃣ Machine Learning Layer
-
-**Model Used:**
-
-* `RandomForestClassifier`
-
-From:
-
-* scikit-learn
-
-**Function:**
-
-* Receives scaled MFCC features
-* Passes them through multiple decision trees
-* Aggregates predictions
-* Outputs:
-
-  * Class label (0 or 1)
-  * Probability score
-
----
-
-## 5️⃣ Output & Visualization Layer
-
-**Outputs:**
-
-* Risk classification:
-
+5.Output & Visualization Layer
+  Outputs:
+  * Risk classification:
   * Low Risk (Healthy)
   * High Risk (Parkinson’s)
-* Confidence percentage
-* MFCC heatmap visualization
-* Confusion matrix (during evaluation)
+  * Confidence percentage
+  * MFCC heatmap visualization
+  * Confusion matrix (during evaluation)
+ Visualization typically uses:
+  * `matplotlib`
+  * `seaborn`
 
-Visualization typically uses:
+6. Data Flow (Step-by-Step)
+ Step 1 — User Upload
+ User uploads a WAV file via web interface.
+ Step 2 — Audio Preprocessing
+   * Audio is loaded using librosa
+   * Trimmed to fixed duration
+   * Converted to waveform array
+ Step 3 — Feature Extraction
+   * MFCC features extracted
+   * Mean aggregation applied
+   * Output becomes fixed-length feature vector
+ Step 4 — Feature Scaling
+   * StandardScaler transforms features
+   * Matches training distribution
+ Step 5 — Model Prediction
+   * Random Forest predicts class
+   * `predict_proba()` gives confidence score
+ Step 6 — Result Display
+   Frontend displays:
+   Prediction label
+   Confidence %
+   MFCC heatmap
 
-* `matplotlib`
-* `seaborn`
-
----
-
-# 🔄 3️⃣ Data Flow (Step-by-Step)
-
-### Step 1 — User Upload
-
-User uploads a WAV file via web interface.
-
-⬇
-
-### Step 2 — Audio Preprocessing
-
-* Audio is loaded using librosa
-* Trimmed to fixed duration
-* Converted to waveform array
-
-⬇
-
-### Step 3 — Feature Extraction
-
-* MFCC features extracted
-* Mean aggregation applied
-* Output becomes fixed-length feature vector
-
-⬇
-
-### Step 4 — Feature Scaling
-
-* StandardScaler transforms features
-* Matches training distribution
-
-⬇
-
-### Step 5 — Model Prediction
-
-* Random Forest predicts class
-* `predict_proba()` gives confidence score
-
-⬇
-
-### Step 6 — Result Display
-
-Frontend displays:
-
-* Prediction label
-* Confidence %
-* MFCC heatmap
-
----
-
-# 🛠 4️⃣ Tech Stack Interaction
-
-Here’s how technologies interact:
+Tech Stack Interaction
+   Here’s how technologies interact:
 
 | Layer            | Technology     | Role                     |
 | ---------------- | -------------- | ------------------------ |
@@ -267,60 +214,58 @@ Here’s how technologies interact:
 | Visualization    | matplotlib     | Heatmaps & plots         |
 | Environment      | Python / Colab | Execution environment    |
 
-### Interaction Flow:
+ Interaction Flow:
+  Gradio → calls Python backend → librosa extracts features →
+  scikit-learn scales → Random Forest predicts →
+  Result returned to Gradio → Displayed to user.
 
-Gradio → calls Python backend → librosa extracts features →
-scikit-learn scales → Random Forest predicts →
-Result returned to Gradio → Displayed to user.
-
----
-
-# 🧠 Architectural Style
-
-Your system follows:
-
-### 🔹 Pipeline Architecture
-
+Architectural Style
+ Your system follows:
+    Pipeline Architectur
 Sequential data transformation:
-
 ```
 Input → Feature Extraction → Scaling → Model → Output
 ```
-
-### 🔹 Modular Architecture
-
-Each layer is independent and can be replaced:
-
+ Modular Architecture
+   Each layer is independent and can be replaced:
 * Replace Random Forest with CNN
 * Replace MFCC with Spectrogram
 * Replace Gradio with FastAPI
 
----
-
-# 📌 Key Strengths
-
+ Key Strengths
 ✔ Simple and modular
 ✔ Easy to deploy
 ✔ Fast prediction
 ✔ Lightweight model
 
----
+ Application Workflow
 
-# ⚠ Current Limitations
+1️⃣ **User Uploads Audio**
+The user uploads a WAV voice file through the Gradio web interface.
 
-* Uses simulated PD data
-* No database storage
-* No real-time streaming
-* Not clinically validated
+2️⃣ **Audio Preprocessing**
+The system loads the file using librosa and trims it to a fixed duration.
 
----
+3️⃣ **Feature Extraction**
+MFCC features are extracted from the audio and converted into a fixed-length numerical feature vector.
 
-If you want, I can now give you:
+4️⃣ **Feature Scaling**
+The feature vector is normalized using `StandardScaler` from scikit-learn.
 
-* 🎓 A viva-ready 2-minute explanation
-* 📄 A project report version
-* 📐 A professional architecture diagram
-* 🚀 A deployment architecture (cloud version)
+5️⃣ **Model Prediction**
+The scaled features are passed to a `RandomForestClassifier`, which predicts:
+
+* Healthy (Low Risk)
+* Parkinson’s (High Risk)
+  It also generates a confidence score.
+
+6️⃣ **Result Display**
+The system displays:
+
+* Risk classification
+* Confidence percentage
+* MFCC heatmap visualization
+
 
 
     
